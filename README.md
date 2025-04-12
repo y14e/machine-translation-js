@@ -6,5 +6,7 @@ import { detectMachineTranslation } from './machine-translation.js';
 
 detectMachineTranslation();
 
-window.addEventListener('machineTranslationDetected', () => console.log('Machine translation detected.'));
+window.addEventListener('machineTranslationDetected', () => {
+  // Machine translation detected
+});
 ```
