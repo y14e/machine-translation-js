@@ -10,3 +10,5 @@ window.addEventListener('machineTranslationDetected', () => {
   // Machine translation detected!
 });
 ```
+## Demo
+https://y14e.github.io/machine-translation-js/
