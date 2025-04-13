@@ -10,5 +10,7 @@ export function detectMachineTranslation() {
   new Map([
     [htmlElement, ['class', 'lang']],
     [titleElement, ['_msttexthash']],
-  ]).forEach((attributes, element) => observer.observe(element, { attributeFilter: attributes }));
+  ]).forEach((attributes, element) => {
+    observer.observe(element, { attributeFilter: attributes });
+  });
 }
