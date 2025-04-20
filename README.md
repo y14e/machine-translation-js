@@ -1,4 +1,4 @@
-# machine-translation-js
+# machine-translation.js
 JS snippet for detecting machine translation.
 ## Installation
 ```js
