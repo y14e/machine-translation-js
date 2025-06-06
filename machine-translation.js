@@ -3,18 +3,15 @@ export function detectMachineTranslation() {
   const titleElement = document.getElementsByTagName('title')[0];
   const strategies = [
     {
-      element: htmlElement,
-      attribute: 'class',
+      set: new Map([[htmlElement, ['class']]]),
       test: () => [...htmlElement.classList].some(className => /translated-(ltr|rtl)/.test(className)),
     },
     {
-      element: htmlElement,
-      attribute: 'lang',
+      set: new Map([[htmlElement, ['lang']]]),
       test: () => htmlElement.getAttribute('lang') !== navigator.language,
     },
     {
-      element: titleElement,
-      attribute: '_msttexthash',
+      set: new Map([[titleElement, ['_msttexthash']]]),
       test: () => titleElement.hasAttribute('_msttexthash'),
     },
   ];
@@ -24,9 +21,11 @@ export function detectMachineTranslation() {
       observer.disconnect();
     }
   });
-  strategies.forEach(({ element, attribute }) => {
-    observer.observe(element, {
-      attributeFilter: [attribute],
-    });
+  strategies.forEach(({ set }) => {
+    for (const [element, attributes] of set.entries()) {
+      observer.observe(element, {
+        attributeFilter: attributes,
+      });
+    }
   });
 }
