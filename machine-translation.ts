@@ -10,7 +10,7 @@ export function detectMachineTranslation(): void {
     {
       element: htmlElement,
       attribute: 'lang',
-      test: () => htmlElement.getAttribute('lang') !== navigator.language,
+      test: () => htmlElement.lang !== navigator.language,
     },
     {
       element: titleElement,
