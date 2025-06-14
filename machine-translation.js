@@ -1,21 +1,21 @@
 export function detectMachineTranslation() {
-  const htmlElement = document.documentElement;
-  const titleElement = document.getElementsByTagName('title')[0];
+  const html = document.documentElement;
+  const title = document.getElementsByTagName('title')[0];
   const strategies = [
     {
-      element: htmlElement,
+      element: html,
       attribute: 'class',
-      test: () => [...htmlElement.classList].some(className => /translated-(ltr|rtl)/.test(className)),
+      test: () => [...html.classList].some(className => /translated-(ltr|rtl)/.test(className)),
     },
     {
-      element: htmlElement,
+      element: html,
       attribute: 'lang',
-      test: () => htmlElement.lang !== navigator.language,
+      test: () => html.lang !== navigator.language,
     },
     {
-      element: titleElement,
+      element: title,
       attribute: '_msttexthash',
-      test: () => titleElement.hasAttribute('_msttexthash'),
+      test: () => title.hasAttribute('_msttexthash'),
     },
   ];
   const observer = new MutationObserver(() => {
