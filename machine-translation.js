@@ -30,3 +30,5 @@ export function detectMachineTranslation() {
     });
   });
 }
+
+// window.addEventListener('DOMContentLoaded', detectMachineTranslation);
