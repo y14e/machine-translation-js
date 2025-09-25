@@ -24,11 +24,7 @@ export function detectMachineTranslation() {
       observer.disconnect();
     }
   });
-  strategies.forEach(({ element, attribute }) => {
-    observer.observe(element, {
-      attributeFilter: [attribute],
-    });
-  });
+  strategies.forEach(({ element, attribute }) => observer.observe(element, { attributeFilter: [attribute] }));
 }
 
 // window.addEventListener('DOMContentLoaded', detectMachineTranslation);
