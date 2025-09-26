@@ -26,5 +26,3 @@ export function detectMachineTranslation(): void {
   });
   strategies.forEach(({ element, attribute }) => observer.observe(element, { attributeFilter: [attribute] }));
 }
-
-// window.addEventListener('DOMContentLoaded', detectMachineTranslation);
