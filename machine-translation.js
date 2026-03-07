@@ -5,7 +5,7 @@ export function detectMachineTranslation() {
     {
       element: html,
       attribute: 'class',
-      test: () => [...html.classList].some(className => /translated-(ltr|rtl)/.test(className)),
+      test: () => [...html.classList].some((className) => /translated-(ltr|rtl)/.test(className)),
     },
     {
       element: html,
@@ -19,7 +19,7 @@ export function detectMachineTranslation() {
     },
   ];
   const observer = new MutationObserver(() => {
-    if (strategies.some(strategy => strategy.test())) {
+    if (strategies.some((strategy) => strategy.test())) {
       window.dispatchEvent(new Event('machineTranslationDetected'));
       observer.disconnect();
     }
