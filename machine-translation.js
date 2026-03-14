@@ -3,18 +3,18 @@ export function detectMachineTranslation() {
   const title = document.getElementsByTagName('title')[0];
   const strategies = [
     {
-      element: html,
       attribute: 'class',
+      element: html,
       test: () => [...html.classList].some((className) => /translated-(ltr|rtl)/.test(className)),
     },
     {
-      element: html,
       attribute: 'lang',
+      element: html,
       test: () => html.lang !== navigator.language,
     },
     {
-      element: title,
       attribute: '_msttexthash',
+      element: title,
       test: () => title.hasAttribute('_msttexthash'),
     },
   ];
@@ -24,5 +24,5 @@ export function detectMachineTranslation() {
       observer.disconnect();
     }
   });
-  strategies.forEach(({ element, attribute }) => observer.observe(element, { attributeFilter: [attribute] }));
+  strategies.forEach(({ attribute, element }) => observer.observe(element, { attributeFilter: [attribute] }));
 }
