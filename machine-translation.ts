@@ -3,8 +3,8 @@ export function detectMachineTranslation(): void {
   const title = document.getElementsByTagName('title')[0];
   const strategies = [
     {
-      element: html,
       attribute: 'class',
+      element: html,
       test: () => [...html.classList].some((className) => /translated-(ltr|rtl)/.test(className)),
     },
     {
