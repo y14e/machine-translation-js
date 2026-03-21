@@ -4,7 +4,7 @@ JS snippet for detecting machine translation.
 ```js
 import { detectMachineTranslation } from './machine-translation.js';
 
-detectMachineTranslation();
+const cleanup = detectMachineTranslation();
 
 window.addEventListener('machineTranslationDetected', () => {
   // Machine translation detected!
