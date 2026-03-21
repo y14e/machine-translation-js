@@ -25,4 +25,5 @@ export function detectMachineTranslation() {
     }
   });
   strategies.forEach(({ attribute, element }) => observer.observe(element, { attributeFilter: [attribute] }));
+  return () => observer.disconnect();
 }
