@@ -8,14 +8,14 @@ export function detectMachineTranslation() {
       test: () => [...html.classList].some((className) => /translated-(ltr|rtl)/.test(className)),
     },
     {
-      attribute: 'lang',
-      element: html,
-      test: () => html.lang !== navigator.language,
-    },
-    {
       attribute: '_msttexthash',
       element: title,
       test: () => title.hasAttribute('_msttexthash'),
+    },
+    {
+      attribute: 'lang',
+      element: html,
+      test: () => html.lang !== navigator.language,
     },
   ];
   const observer = new MutationObserver(() => {
