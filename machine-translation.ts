@@ -1,4 +1,4 @@
-export function detectMachineTranslation(): () => void {
+export function detectMachineTranslation(): () => {
   const html = document.documentElement;
   const title = document.getElementsByTagName('title')[0];
   const strategies = [
@@ -24,6 +24,6 @@ export function detectMachineTranslation(): () => void {
       observer.disconnect();
     }
   });
-  strategies.forEach(({ attribute, element }) => void observer.observe(element, { attributeFilter: [attribute] }));
+  strategies.forEach(({ attribute, element }) => observer.observe(element, { attributeFilter: [attribute] }));
   return () => observer.disconnect();
 }
