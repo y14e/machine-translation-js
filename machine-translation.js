@@ -3,27 +3,43 @@ export function detectMachineTranslation() {
   const title = document.getElementsByTagName('title')[0];
   const strategies = [
     {
-      attr: 'class',
+      attribute: 'class',
       element: html,
-      test: () => [...html.classList].some((className) => /translated-(ltr|rtl)/.test(className)),
+      test: () => {
+        return [...html.classList].some((className) => {
+          return /translated-(ltr|rtl)/.test(className);
+        });
+      },
     },
     {
-      attr: '_msttexthash',
+      attribute: '_msttexthash',
       element: title,
-      test: () => title.hasAttribute('_msttexthash'),
+      test: () => {
+        return title.hasAttribute('_msttexthash');
+      },
     },
     {
-      attr: 'lang',
+      attribute: 'lang',
       element: html,
-      test: () => html.lang !== navigator.language,
+      test: () => {
+        return new Intl.Locale(html.lang).language !== new Intl.Locale(navigator.language).language;
+      },
     },
   ];
   const observer = new MutationObserver(() => {
-    if (strategies.some((strategy) => strategy.test())) {
+    if (
+      strategies.some((strategy) => {
+        return strategy.test();
+      })
+    ) {
       window.dispatchEvent(new Event('machineTranslationDetected'));
       observer.disconnect();
     }
   });
-  strategies.forEach(({ attr, element }) => observer.observe(element, { attributeFilter: [attr] }));
-  return () => observer.disconnect();
+  strategies.forEach(({ attribute, element }) => {
+    observer.observe(element, { attributeFilter: [attribute] });
+  });
+  return () => {
+    observer.disconnect();
+  };
 }
