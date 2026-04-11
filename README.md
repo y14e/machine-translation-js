@@ -1,8 +1,8 @@
-# machine-translation.js
-JS snippet for detecting machine translation.
+# machine-translation.ts
+TS snippet for detecting machine translation.
 ## Installation
-```js
-import { detectMachineTranslation } from './machine-translation.js';
+```ts
+import { detectMachineTranslation } from './machine-translation';
 
 const cleanup = detectMachineTranslation();
 
@@ -11,4 +11,4 @@ window.addEventListener('machineTranslationDetected', () => {
 });
 ```
 ## Demo
-https://y14e.github.io/machine-translation-js/
+https://y14e.github.io/machine-translation-ts/
