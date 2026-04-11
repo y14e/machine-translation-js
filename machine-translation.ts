@@ -26,20 +26,22 @@ export function detectMachineTranslation(): () => void {
       },
     },
   ];
-  const observer = new MutationObserver(() => {
+  let observer: MutationObserver | null = new MutationObserver(() => {
     if (
       strategies.some((strategy) => {
         return strategy.test();
       })
     ) {
       window.dispatchEvent(new Event('machineTranslationDetected'));
-      observer.disconnect();
+      observer?.disconnect();
+      observer = null;
     }
   });
   strategies.forEach(({ attribute, element }) => {
-    observer.observe(element, { attributeFilter: [attribute] });
+    observer?.observe(element, { attributeFilter: [attribute] });
   });
   return () => {
-    observer.disconnect();
+    observer?.disconnect();
+    observer = null;
   };
 }
