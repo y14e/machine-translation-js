@@ -28,19 +28,19 @@ export function detectMachineTranslation(): () => void {
     },
   ];
 
-  let observer: MutationObserver | null = new MutationObserver(() => {
-    if (strategies.some((strategy) => strategy.test())) {
-      window.dispatchEvent(new Event('machineTranslationDetected'));
+  const detect = (): void => {
+    if (!strategies.some((strategy) => strategy.test())) return;
 
-      observer?.disconnect();
-      observer = null;
-    }
-  });
+    window.dispatchEvent(new Event('machineTranslationDetected'));
+
+    observer?.disconnect();
+    observer = null;
+  };
+
+  let observer: MutationObserver | null = new MutationObserver(detect);
 
   for (const { attribute, element } of strategies) {
-    observer?.observe(element, {
-      attributeFilter: [attribute],
-    });
+    observer?.observe(element, { attributeFilter: [attribute] });
   }
 
   return (): void => {
