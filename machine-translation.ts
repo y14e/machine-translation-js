@@ -19,9 +19,12 @@ export function detectMachineTranslation(): () => void {
     {
       attribute: 'lang',
       element: html,
-      test: () =>
-        new Intl.Locale(html.lang).language !==
-        new Intl.Locale(navigator.language).language,
+      test: () => {
+        const htmlLanguage = new Intl.Locale(html.lang).language;
+        const navigatorLanguage = new Intl.Locale(navigator.language).language;
+
+        return htmlLanguage !== navigatorLanguage;
+      },
     },
   ];
 
