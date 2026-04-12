@@ -1,7 +1,6 @@
 export function detectMachineTranslation(): () => void {
   const html = document.documentElement;
   const title = document.getElementsByTagName('title')[0];
-
   const strategies = [
     {
       attribute: 'class',
@@ -16,11 +15,7 @@ export function detectMachineTranslation(): () => void {
     {
       attribute: 'lang',
       element: html,
-      test: () => {
-        const htmlLanguage = new Intl.Locale(html.lang).language;
-        const navigatorLanguage = new Intl.Locale(navigator.language).language;
-        return htmlLanguage !== navigatorLanguage;
-      },
+      test: () => new Intl.Locale(html.lang).language !== new Intl.Locale(navigator.language).language,
     },
   ];
 
@@ -28,12 +23,12 @@ export function detectMachineTranslation(): () => void {
     if (!strategies.some((strategy) => strategy.test())) return;
 
     window.dispatchEvent(new Event('machineTranslationDetected'));
-
     observer?.disconnect();
     observer = null;
   };
 
   let observer: MutationObserver | null = new MutationObserver(detect);
+
   for (const { attribute, element } of strategies) {
     observer?.observe(element, { attributeFilter: [attribute] });
   }
