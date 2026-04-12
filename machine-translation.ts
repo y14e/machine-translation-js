@@ -6,10 +6,7 @@ export function detectMachineTranslation(): () => void {
     {
       attribute: 'class',
       element: html,
-      test: () =>
-        [...html.classList].some((className) =>
-          /translated-(ltr|rtl)/.test(className),
-        ),
+      test: () => [...html.classList].some((className) => /translated-(ltr|rtl)/.test(className)),
     },
     {
       attribute: '_msttexthash',
@@ -22,7 +19,6 @@ export function detectMachineTranslation(): () => void {
       test: () => {
         const htmlLanguage = new Intl.Locale(html.lang).language;
         const navigatorLanguage = new Intl.Locale(navigator.language).language;
-
         return htmlLanguage !== navigatorLanguage;
       },
     },
