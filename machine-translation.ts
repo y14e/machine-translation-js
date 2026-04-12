@@ -34,7 +34,6 @@ export function detectMachineTranslation(): () => void {
   };
 
   let observer: MutationObserver | null = new MutationObserver(detect);
-
   for (const { attribute, element } of strategies) {
     observer?.observe(element, { attributeFilter: [attribute] });
   }
