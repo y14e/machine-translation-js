@@ -5,23 +5,36 @@ export function detectMachineTranslation(): () => void {
     {
       attribute: 'class',
       element: html,
-      test: () => [...html.classList].some((className) => /translated-(ltr|rtl)/.test(className)),
+      test: () => {
+        return [...html.classList].some((className) => {
+          return /translated-(ltr|rtl)/.test(className);
+        });
+      },
     },
     {
       attribute: '_msttexthash',
       element: title,
-      test: () => title.hasAttribute('_msttexthash'),
+      test: () => {
+        return title.hasAttribute('_msttexthash');
+      },
     },
     {
       attribute: 'lang',
       element: html,
-      test: () => new Intl.Locale(html.lang).language !== new Intl.Locale(navigator.language).language,
+      test: () => {
+        return new Intl.Locale(html.lang).language !== new Intl.Locale(navigator.language).language;
+      },
     },
   ];
 
   const detect = (): void => {
-    if (!strategies.some((strategy) => strategy.test())) return;
-
+    if (
+      !strategies.some((strategy) => {
+        return strategy.test();
+      })
+    ) {
+      return;
+    }
     window.dispatchEvent(new Event('machineTranslationDetected'));
     observer?.disconnect();
     observer = null;
