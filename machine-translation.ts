@@ -2,7 +2,6 @@ export function detectMachineTranslation(): () => void {
   const html = document.documentElement;
   const title = document.getElementsByTagName('title')[0];
   const language = new Intl.Locale(navigator.language).language;
-
   const strategies = [
     {
       attribute: 'class',
@@ -30,17 +29,14 @@ export function detectMachineTranslation(): () => void {
   ];
 
   let scheduled = false;
-
   const detect = (): void => {
     if (scheduled) {
       return;
     }
 
     scheduled = true;
-
     requestAnimationFrame((): void => {
       scheduled = false;
-
       const translated = strategies.some((strategy): boolean => {
         return strategy.test();
       });
@@ -50,7 +46,6 @@ export function detectMachineTranslation(): () => void {
       }
 
       window.dispatchEvent(new Event('machineTranslationDetected'));
-
       observer?.disconnect();
       observer = null;
     });
@@ -66,6 +61,7 @@ export function detectMachineTranslation(): () => void {
 
   for (const { attribute, element } of strategies) {
     const list = attributeMap.get(element);
+
     if (list !== undefined) {
       list.push(attribute);
     }
