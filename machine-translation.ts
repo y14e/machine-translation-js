@@ -28,16 +28,14 @@ export function detectMachineTranslation(): () => void {
     },
   ];
 
-  let scheduled = false;
+  let timer: number | undefined;
 
   const detect = (): void => {
-    if (scheduled) {
+    if (timer !== undefined) {
       return;
     }
 
-    scheduled = true;
-    requestAnimationFrame((): void => {
-      scheduled = false;
+    timer = requestAnimationFrame((): void => {
       const translated = strategies.some((strategy): boolean => {
         return strategy.test();
       });
@@ -77,5 +75,10 @@ export function detectMachineTranslation(): () => void {
   return (): void => {
     observer?.disconnect();
     observer = null;
+
+    if (timer !== undefined) {
+      cancelAnimationFrame(timer);
+      timer = undefined;
+    }
   };
 }
