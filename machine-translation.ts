@@ -29,6 +29,7 @@ export function detectMachineTranslation(): () => void {
   ];
 
   let scheduled = false;
+
   const detect = (): void => {
     if (scheduled) {
       return;
