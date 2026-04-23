@@ -59,10 +59,10 @@ export function detectMachineTranslation(): () => void {
   }
 
   for (const { attribute, element } of strategies) {
-    const list = attributeMap.get(element);
+    const attributes = attributeMap.get(element);
 
-    if (list !== undefined) {
-      list.push(attribute);
+    if (attributes !== undefined) {
+      attributes.push(attribute);
     }
   }
 
