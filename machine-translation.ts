@@ -36,11 +36,11 @@ export function detectMachineTranslation(): () => void {
     }
 
     timer = requestAnimationFrame((): void => {
-      const translated = strategies.some((strategy): boolean => {
+      const isTranslated = strategies.some((strategy): boolean => {
         return strategy.test();
       });
 
-      if (!translated) {
+      if (!isTranslated) {
         return;
       }
 
