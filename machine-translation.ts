@@ -6,25 +6,17 @@ export function detectMachineTranslation(): () => void {
     {
       attribute: 'class',
       element: html,
-      test: (): boolean => {
-        return [...html.classList].some((className: string) => {
-          return /translated-(ltr|rtl)/.test(className);
-        });
-      },
+      test: () => [...html.classList].some((className: string) => /translated-(ltr|rtl)/.test(className)),
     },
     {
       attribute: '_msttexthash',
       element: title,
-      test: (): boolean => {
-        return title.hasAttribute('_msttexthash');
-      },
+      test: () => title.hasAttribute('_msttexthash'),
     },
     {
       attribute: 'lang',
       element: html,
-      test: (): boolean => {
-        return new Intl.Locale(html.lang).language !== language;
-      },
+      test: () => new Intl.Locale(html.lang).language !== language,
     },
   ];
 
@@ -36,11 +28,7 @@ export function detectMachineTranslation(): () => void {
     }
 
     timer = requestAnimationFrame(() => {
-      const isTranslated = strategies.some((strategy) => {
-        return strategy.test();
-      });
-
-      if (!isTranslated) {
+      if (!strategies.some((strategy) => strategy.test())) {
         return;
       }
 
@@ -50,25 +38,15 @@ export function detectMachineTranslation(): () => void {
     });
   };
 
-  const attributeMap = new Map<Element, string[]>();
-
-  for (const { element } of strategies) {
-    if (!attributeMap.has(element)) {
-      attributeMap.set(element, []);
-    }
-  }
+  const map = new Map<Element, string[]>();
 
   for (const { attribute, element } of strategies) {
-    const attributes = attributeMap.get(element);
-
-    if (attributes !== undefined) {
-      attributes.push(attribute);
-    }
+    (map.has(element) ? map.get(element) : map.set(element, []).get(element))?.push(attribute);
   }
 
   let observer: MutationObserver | null = new MutationObserver(detect);
 
-  for (const [element, attributes] of attributeMap) {
+  for (const [element, attributes] of map) {
     observer.observe(element, { attributeFilter: attributes });
   }
 
