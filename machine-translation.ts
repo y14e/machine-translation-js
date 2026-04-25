@@ -7,7 +7,7 @@ export function detectMachineTranslation(): () => void {
       attribute: 'class',
       element: html,
       test: (): boolean => {
-        return [...html.classList].some((className: string): boolean => {
+        return [...html.classList].some((className: string) => {
           return /translated-(ltr|rtl)/.test(className);
         });
       },
@@ -35,8 +35,8 @@ export function detectMachineTranslation(): () => void {
       return;
     }
 
-    timer = requestAnimationFrame((): void => {
-      const isTranslated = strategies.some((strategy): boolean => {
+    timer = requestAnimationFrame(() => {
+      const isTranslated = strategies.some((strategy) => {
         return strategy.test();
       });
 
@@ -72,7 +72,7 @@ export function detectMachineTranslation(): () => void {
     observer.observe(element, { attributeFilter: attributes });
   }
 
-  return (): void => {
+  return () => {
     observer?.disconnect();
     observer = null;
 
