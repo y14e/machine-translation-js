@@ -27,7 +27,7 @@ export function detectMachineTranslation(): () => void {
 
   let timer: number | undefined;
 
-  const detect = (): void => {
+  const detect = () => {
     if (timer !== undefined) {
       return;
     }
