@@ -42,6 +42,15 @@ export function detectMachineTranslation(): () => void {
     },
   ];
 
+  const map = new Map<Element, string[]>();
+
+  for (const { attribute, element } of strategies) {
+    (map.has(element)
+      ? map.get(element)
+      : map.set(element, []).get(element)
+    )?.push(attribute);
+  }
+
   let timer: number | undefined;
 
   function detect() {
@@ -58,15 +67,6 @@ export function detectMachineTranslation(): () => void {
       observer?.disconnect();
       observer = null;
     });
-  }
-
-  const map = new Map<Element, string[]>();
-
-  for (const { attribute, element } of strategies) {
-    (map.has(element)
-      ? map.get(element)
-      : map.set(element, []).get(element)
-    )?.push(attribute);
   }
 
   let observer: MutationObserver | null = new MutationObserver(detect);
