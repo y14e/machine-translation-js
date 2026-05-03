@@ -25,7 +25,10 @@ export function detectMachineTranslation(): () => void {
     {
       attribute: 'class',
       element: html,
-      test: () => [...html.classList].some((className: string) => /translated-(ltr|rtl)/.test(className)),
+      test: () =>
+        [...html.classList].some((className: string) =>
+          /translated-(ltr|rtl)/.test(className),
+        ),
     },
     {
       attribute: '_msttexthash',
@@ -60,7 +63,10 @@ export function detectMachineTranslation(): () => void {
   const map = new Map<Element, string[]>();
 
   for (const { attribute, element } of strategies) {
-    (map.has(element) ? map.get(element) : map.set(element, []).get(element))?.push(attribute);
+    (map.has(element)
+      ? map.get(element)
+      : map.set(element, []).get(element)
+    )?.push(attribute);
   }
 
   let observer: MutationObserver | null = new MutationObserver(detect);
