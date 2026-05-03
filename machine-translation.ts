@@ -8,9 +8,9 @@
  * @see {@link https://github.com/y14e/machine-translation-ts}
  */
 
-// -----------------------------------------------------------------------------
-// [APIs]
-// -----------------------------------------------------------------------------
+// =============================================================================
+// APIs
+// =============================================================================
 
 export function detectMachineTranslation(): () => void {
   const html = document.documentElement;
@@ -44,7 +44,7 @@ export function detectMachineTranslation(): () => void {
 
   let timer: number | undefined;
 
-  const detect = () => {
+  function detect() {
     if (timer !== undefined) {
       return;
     }
@@ -58,7 +58,7 @@ export function detectMachineTranslation(): () => void {
       observer?.disconnect();
       observer = null;
     });
-  };
+  }
 
   const map = new Map<Element, string[]>();
 
