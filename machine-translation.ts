@@ -1,7 +1,7 @@
 /**
  * machine-translation.ts
  *
- * @version 1.0.0
+ * @version 1.0.1
  * @author Yusuke Kamiyamane
  * @license MIT
  * @copyright Copyright (c) 2026 Yusuke Kamiyamane
@@ -17,7 +17,7 @@ export function detectMachineTranslation(): () => void {
   const title = document.getElementsByTagName('title')[0];
 
   if (!title) {
-    return () => {};
+    throw new Error('Missing <title> element');
   }
 
   const language = new Intl.Locale(navigator.language).language;
