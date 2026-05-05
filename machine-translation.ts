@@ -1,7 +1,7 @@
 /**
  * machine-translation.ts
  *
- * @version 1.0.2
+ * @version 1.0.3
  * @author Yusuke Kamiyamane
  * @license MIT
  * @copyright Copyright (c) Yusuke Kamiyamane
@@ -12,7 +12,7 @@
 // APIs
 // -----------------------------------------------------------------------------
 
-export function detectMachineTranslation(): () => void {
+export function detectMachineTranslation() {
   const html = document.documentElement;
   const title = document.querySelector('title');
 
