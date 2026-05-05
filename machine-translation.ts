@@ -53,7 +53,7 @@ export function detectMachineTranslation() {
 
   let timer: number | undefined;
 
-  function detect() {
+  function callback() {
     if (timer !== undefined) {
       return;
     }
@@ -69,7 +69,7 @@ export function detectMachineTranslation() {
     });
   }
 
-  let observer: MutationObserver | null = new MutationObserver(detect);
+  let observer: MutationObserver | null = new MutationObserver(callback);
 
   for (const [element, attributes] of map) {
     observer.observe(element, { attributeFilter: attributes });
