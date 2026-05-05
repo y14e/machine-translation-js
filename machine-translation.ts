@@ -1,7 +1,7 @@
 /**
  * machine-translation.ts
  *
- * @version 1.0.1
+ * @version 1.0.2
  * @author Yusuke Kamiyamane
  * @license MIT
  * @copyright Copyright (c) Yusuke Kamiyamane
@@ -14,9 +14,9 @@
 
 export function detectMachineTranslation(): () => void {
   const html = document.documentElement;
-  const title = document.getElementsByTagName('title')[0];
+  const title = document.querySelector('title');
 
-  if (!title) {
+  if (title === null) {
     throw new Error('Missing <title> element');
   }
 
