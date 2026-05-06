@@ -16,7 +16,7 @@ export function detectMachineTranslation() {
   const html = document.documentElement;
   const title = document.querySelector('title');
 
-  if (title === null) {
+  if (!title) {
     throw new Error('Missing <title> element');
   }
 
